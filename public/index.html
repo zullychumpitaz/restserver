@@ -28,11 +28,8 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
         function handleCredentialResponse(response) {
-            // Google Token : ID_TOKEN
-            // console.log( 'id_token', response.credential );
             const body = { 'id_token': response.credential };
-
-            var url = ( window.location.hostname.includes('localhost') )
+            const url = ( window.location.hostname.includes('localhost') )
                         ? 'http://localhost:8080/api/auth/google'
                         : 'https://restserver-zull.herokuapp.com/api/auth/google';
 

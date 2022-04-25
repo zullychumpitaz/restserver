@@ -178,7 +178,7 @@ const showImageCloudinary = async (req, res = response) => {
     }
 
     if( modelo.img ){
-        res.sendFile( modelo.img );
+        return res.sendFile( modelo.img );
     }
 
     const defaultImage = path.join( __dirname, '../assets/no-image.jpg');

@@ -1,0 +1,1 @@
+# Aquí van a guardarse los archivos cargados desde la app

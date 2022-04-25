@@ -151,6 +151,40 @@ const updateImageCloudinary = async ( req, res = response) => {
     });
 }
 
+const showImageCloudinary = async (req, res = response) => {
+    const { id, collection } = req.params;
+
+    let modelo;
+
+    switch ( collection ) {
+        case 'users':
+            modelo = await User.findById( id );
+            if( !modelo ){
+                return res.status(400).json({
+                    msg: `No existe un usuario con el ID: ${ id }`
+                });
+            }
+            break;
+        case 'products':
+                modelo = await Product.findById( id );
+                if( !modelo ){
+                    return res.status(400).json({
+                        msg: `No existe un producto con el ID: ${ id }`
+                    });
+                }
+                break;
+        default:
+            res.status(500).json({ msg: 'Se me olvidó validar esto'});
+    }
+
+    if( modelo.img ){
+        res.sendFile( modelo.img );
+    }
+
+    const defaultImage = path.join( __dirname, '../assets/no-image.jpg');
+    res.sendFile( defaultImage );
+}
+
 module.exports = {
     upload,
     updateImage,
